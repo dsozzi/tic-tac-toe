@@ -21,3 +21,11 @@ and visit `localhost:3000`
 ### Demo
 
 [https://www.dsozzi.it/tic-tac-toe](https://www.dsozzi.it/tic-tac-toe)
+
+### Tests
+
+To run some tests, enter:
+
+```
+npm run test
+```

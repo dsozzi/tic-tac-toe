@@ -44,7 +44,7 @@ class App extends Component {
      * Check if the given number is -3 or 3.
      * @param {number} num - The number that needs to be checked
      */
-    isMagiNumber = num => {
+    isMagicNumber = num => {
         return Math.abs(num) === 3;
     };
 
@@ -54,14 +54,14 @@ class App extends Component {
      */
     checkWinner = arr => {
         return (
-            this.isMagiNumber(arr[0][0] + arr[0][1] + arr[0][2]) ||
-            this.isMagiNumber(arr[1][0] + arr[1][1] + arr[1][2]) ||
-            this.isMagiNumber(arr[2][0] + arr[2][1] + arr[2][2]) ||
-            this.isMagiNumber(arr[0][0] + arr[1][0] + arr[2][0]) ||
-            this.isMagiNumber(arr[0][1] + arr[1][1] + arr[2][1]) ||
-            this.isMagiNumber(arr[0][2] + arr[1][2] + arr[2][2]) ||
-            this.isMagiNumber(arr[0][0] + arr[1][1] + arr[2][2]) ||
-            this.isMagiNumber(arr[0][2] + arr[1][1] + arr[2][0])
+            this.isMagicNumber(arr[0][0] + arr[0][1] + arr[0][2]) ||
+            this.isMagicNumber(arr[1][0] + arr[1][1] + arr[1][2]) ||
+            this.isMagicNumber(arr[2][0] + arr[2][1] + arr[2][2]) ||
+            this.isMagicNumber(arr[0][0] + arr[1][0] + arr[2][0]) ||
+            this.isMagicNumber(arr[0][1] + arr[1][1] + arr[2][1]) ||
+            this.isMagicNumber(arr[0][2] + arr[1][2] + arr[2][2]) ||
+            this.isMagicNumber(arr[0][0] + arr[1][1] + arr[2][2]) ||
+            this.isMagicNumber(arr[0][2] + arr[1][1] + arr[2][0])
         );
     };
 

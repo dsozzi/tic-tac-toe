@@ -6,7 +6,7 @@ export default class Message extends Component {
         const { movesCount, gameEnded, readablePlayer } = this.props;
         return (
             <React.Fragment>
-                {gameEnded && <p> {`Congratulations!!! ${readablePlayer} you are the winner!`} </p>}
+                {gameEnded && <p>{`Congratulations!!! ${readablePlayer} you are the winner!`}</p>}
                 {movesCount === 9 && !gameEnded && <p>No more moves.</p>}
                 {movesCount < 9 && !gameEnded && <p>{`${readablePlayer}, it's your turn!`}</p>}
             </React.Fragment>
