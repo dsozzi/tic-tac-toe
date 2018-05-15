@@ -1,4 +1,5 @@
-##TIC TAC TOE
+# TIC TAC TOE
+
 A tic tac toe game made in React.
 
 ## Getting Started
