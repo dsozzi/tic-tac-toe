@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import App from "../App";
 import { mount } from "enzyme";
 
 it("checks if App mounts correctly", () => {
