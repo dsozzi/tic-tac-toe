@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.game {
+    max-width: 700px;
+    margin: auto;
+    padding: 40px;
+}
+
+main {
+    display: flex;
+}
+#board {
+    min-width: 300px;
+}
+#board button {
+    width: 100px;
+    height: 100px;
+    font-size: 3em;
+    outline: none;
+}
+
+#status {
+    padding: 0 20px;
+}
+
+.btn {
+    outline: none;
+    border: none;
+    color: #fff;
+    background-color: #1a8ed1;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.title {
+    font-size: 3em;
+    margin: 20px 0;
+}
