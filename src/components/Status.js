@@ -1,9 +1,20 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-const Message = props => <p>{props.message}</p>;
-export default Message;
-
+export default class Message extends Component {
+    render() {
+        const { movesCount, gameEnded, readablePlayer } = this.props;
+        return (
+            <React.Fragment>
+                {gameEnded && <p> {`Congratulations!!! ${readablePlayer} you are the winner!`} </p>}
+                {movesCount === 9 && !gameEnded && <p>No more moves.</p>}
+                {movesCount < 9 && !gameEnded && <p>{`${readablePlayer}, it's your turn!`}</p>}
+            </React.Fragment>
+        );
+    }
+}
 Message.propTypes = {
-    message: PropTypes.string
+    movesCount: PropTypes.number.isRequired,
+    gameEnded: PropTypes.bool.isRequired,
+    readablePlayer: PropTypes.string.isRequired
 };

@@ -102,12 +102,7 @@ class App extends Component {
                         <button className="btn" onClick={this.newGame}>
                             New Game
                         </button>
-
-                        {/* in case someone won */}
-                        {gameEnded && <Status message={`Congratulations!!! ${readablePlayer} you are the winner!`} />}
-
-                        {/* in case there are no moves available */}
-                        {movesCount === 9 && !gameEnded && <Status message="No more moves!!!" />}
+                        <Status movesCount={movesCount} gameEnded={gameEnded} readablePlayer={readablePlayer} />
                     </div>
                 </main>
             </div>
