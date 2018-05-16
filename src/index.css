@@ -22,8 +22,12 @@ main {
 #board button {
     width: 100px;
     height: 100px;
-    font-size: 3em;
+    font-size: 50px;
+    padding: 0;
+    text-align: center;
     outline: none;
+    background: #fbfbfb;
+    border-radius: none;
 }
 
 #status {
@@ -42,4 +46,23 @@ main {
 .title {
     font-size: 3em;
     margin: 20px 0;
+}
+
+@media screen and (max-width: 840px) {
+    .game {
+        max-width: 100%;
+        padding: 20px;
+        text-align: center;
+    }
+    main {
+        flex-direction: column;
+    }
+
+    #status {
+        margin-top: 20px;
+    }
+
+    .btn {
+        padding: 15px 40px;
+    }
 }
