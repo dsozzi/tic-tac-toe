@@ -8,7 +8,7 @@ body {
 }
 
 .game {
-    max-width: 700px;
+    max-width: 900px;
     margin: auto;
     padding: 40px;
 }
@@ -17,7 +17,7 @@ main {
     display: flex;
 }
 #board {
-    min-width: 300px;
+    min-width: 500px;
 }
 #board button {
     width: 100px;

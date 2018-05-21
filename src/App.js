@@ -2,15 +2,24 @@ import React, { Component } from "react";
 import Box from "./components/Box";
 import Status from "./components/Status";
 
-const getInitialState = () => ({
-    gameStatus: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+const MATRIX_SIZE = 3;
+
+const getInitialState = n => ({
+    gameStatus: (function() {
+        // NOT GOOD --> new Array(n).fill(new Array(n).fill(0));
+        var a = [];
+        for (var i = 0; i < MATRIX_SIZE; i++) {
+            a.push(new Array(MATRIX_SIZE).fill(0));
+        }
+        return a;
+    })(),
     gameEnded: false,
     currentPlayer: -1,
     movesCount: 0
 });
 
 class App extends Component {
-    state = getInitialState();
+    state = getInitialState(MATRIX_SIZE);
 
     /**
      * Function called when clicking on a cell box.
@@ -41,11 +50,11 @@ class App extends Component {
     };
 
     /**
-     * Check if the given number is -3 or 3.
+     * Check if the given number is the matrix size.
      * @param {number} num - The number that needs to be checked
      */
     isMagicNumber = num => {
-        return Math.abs(num) === 3;
+        return Math.abs(num) === MATRIX_SIZE;
     };
 
     /**
@@ -53,23 +62,68 @@ class App extends Component {
      * @param {Array} arr - The combination array
      */
     checkWinner = arr => {
-        return (
-            this.isMagicNumber(arr[0][0] + arr[0][1] + arr[0][2]) ||
-            this.isMagicNumber(arr[1][0] + arr[1][1] + arr[1][2]) ||
-            this.isMagicNumber(arr[2][0] + arr[2][1] + arr[2][2]) ||
-            this.isMagicNumber(arr[0][0] + arr[1][0] + arr[2][0]) ||
-            this.isMagicNumber(arr[0][1] + arr[1][1] + arr[2][1]) ||
-            this.isMagicNumber(arr[0][2] + arr[1][2] + arr[2][2]) ||
-            this.isMagicNumber(arr[0][0] + arr[1][1] + arr[2][2]) ||
-            this.isMagicNumber(arr[0][2] + arr[1][1] + arr[2][0])
-        );
+        const self = this;
+        let winning = false;
+
+        if (this.movesCount < MATRIX_SIZE) return false;
+
+        const sumArr = arr => arr.reduce((acc, cur) => acc + cur, 0);
+
+        //check rows
+        arr.forEach(function(row, i) {
+            if (self.isMagicNumber(sumArr(row))) {
+                winning = true;
+            }
+        });
+
+        // not good looking but I can skip few iterations if a winning solution is in a row
+        if (!winning) {
+            checkColumns();
+        }
+        if (!winning) {
+            checkDiagonals();
+        }
+
+        //check columns
+        function checkColumns() {
+            let columnsResults = new Array(MATRIX_SIZE).fill(0);
+            arr.forEach(function(row, idx) {
+                row.forEach(function(num, boxIdx) {
+                    columnsResults[boxIdx] += num;
+                });
+            });
+
+            //use for cycle to allow exit during loop
+            for (let i = 0; i < columnsResults.length; i++) {
+                let res = columnsResults[i];
+                if (self.isMagicNumber(res)) {
+                    winning = true;
+                    return;
+                }
+            }
+        }
+
+        function checkDiagonals() {
+            let diagonalLeft = 0;
+            let diagonalRight = 0;
+            arr.forEach(function(row, idx) {
+                diagonalLeft += row[idx];
+                diagonalRight += row[MATRIX_SIZE - idx - 1];
+            });
+
+            if (self.isMagicNumber(diagonalLeft) || self.isMagicNumber(diagonalRight)) {
+                winning = true;
+            }
+        }
+
+        return winning;
     };
 
     /**
      * Function to reset the game status
      */
     newGame = () => {
-        const obj = getInitialState();
+        const obj = getInitialState(MATRIX_SIZE);
         this.setState(obj);
     };
 
@@ -102,7 +156,12 @@ class App extends Component {
                         <button className="btn" onClick={this.newGame}>
                             New Game
                         </button>
-                        <Status movesCount={movesCount} gameEnded={gameEnded} readablePlayer={readablePlayer} />
+                        <Status
+                            maxMoves={MATRIX_SIZE * MATRIX_SIZE}
+                            movesCount={movesCount}
+                            gameEnded={gameEnded}
+                            readablePlayer={readablePlayer}
+                        />
                     </div>
                 </main>
             </div>
