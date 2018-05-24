@@ -65,7 +65,7 @@ class App extends Component {
         const self = this;
         let winning = false;
 
-        if (this.movesCount < MATRIX_SIZE) return false;
+        if (this.state.movesCount < MATRIX_SIZE * 2 - 2) return false;
 
         const sumArr = arr => arr.reduce((acc, cur) => acc + cur, 0);
 
